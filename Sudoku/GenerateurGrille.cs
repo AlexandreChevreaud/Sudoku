@@ -5,10 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sudoku
-{
-    public static class GenerateurGrille
+{    public static class GenerateurGrille
     {
-        public static Grille generer(int n)
+        /// <summary>
+        /// Permet de génerer une grille de sudoku aléatoire
+        /// </summary>
+        /// <param name="nbCases">Nombre de cases à afficher</param>
+        /// <returns>Une grille avec des 0 sur les cases à deviner</returns>
+        public static Grille generer(int nbCases)
         {
             Grille grille = new Grille();
 
@@ -18,11 +22,11 @@ namespace Sudoku
             {
                 for (int j = 0; j <= 8; j++)
                 {
-                    grille.setCase(i, j, tab[i * 9 + j]);
+                    grille.setCaseValue(i, j, tab[i * 9 + j]);
                 }
             }
             
-            for (int i = 1;i <= 81 - n;i++)
+            for (int i = 1;i <= 81 - nbCases;i++)
             {
                 int x;
                 int y; 
@@ -31,8 +35,8 @@ namespace Sudoku
                     Random rnd = new Random();
                     x = rnd.Next(9);
                     y = rnd.Next(9);
-                } while (grille.getCase(x,y)==0);
-                grille.setCase(x, y, 0);
+                } while (grille.getCaseValue(x,y)==0);
+                grille.setCaseValue(x, y, 0);
             }
             return grille;
         }

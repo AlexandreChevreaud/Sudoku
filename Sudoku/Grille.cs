@@ -16,6 +16,9 @@ namespace Sudoku
             InitialiserGrille();
         }
         
+        /// <summary>
+        /// Méthode permettant d'initialiser une grille vide
+        /// </summary>
         private void InitialiserGrille()
         {
            for (int i =0; i<9;i++)
@@ -27,6 +30,11 @@ namespace Sudoku
            }
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier si une ligne est bonne ou nom
+        /// </summary>
+        /// <param name="i">ligne à vérifier</param>
+        /// <returns>booléan représentant si la ligne est correct</returns>
         public bool checkOneLine(int i)
         {
             var tab = new List<int>();
@@ -37,6 +45,10 @@ namespace Sudoku
             return tab.Intersect(list_nb).Count() == list_nb.Count();
         }
 
+        /// <summary>
+        /// Méthode permettant de vérifier toutes les lignes du code
+        /// </summary>
+        /// <returns>Boolean représentant si toutes les lignes sont bonnes</returns>
         public bool checkAllLine()
         {
             for (int i=0; i<9;i++)
@@ -49,12 +61,24 @@ namespace Sudoku
             return true;
         }
 
-        public void setCase(int i, int j,int value)
+        /// <summary>
+        /// Méthode permettant de changer la valeur d'une case
+        /// </summary>
+        /// <param name="i">ligne de la case</param>
+        /// <param name="j">colonne de la case</param>
+        /// <param name="value">Valeur à mettre dans la case</param>
+        public void setCaseValue(int i, int j,int value)
         {
             List_cases[i,j].Value = value;
         }
 
-        public int  getCase(int i,int j)
+        /// <summary>
+        /// Permet de recuperer la valeur d'une case
+        /// </summary>
+        /// <param name="i">ligne de la case</param>
+        /// <param name="j">colonne de la case</param>
+        /// <returns></returns>
+        public int getCaseValue(int i,int j)
         {
             return List_cases[i,j].Value;
         }

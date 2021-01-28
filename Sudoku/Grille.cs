@@ -8,7 +8,7 @@ namespace Sudoku
 {
     public class Grille
     {
-        private Case[][] List_cases = new Case[9][];
+        private Case[,] List_cases = new Case[9,9];
         private List<int> list_nb = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         public Grille()
@@ -22,7 +22,7 @@ namespace Sudoku
            {
                 for (int j=0; j<9;j++)
                 {
-                    List_cases[i][j] = new Case(0);
+                    List_cases[i,j] = new Case(0);
                 }
            }
         }
@@ -30,7 +30,7 @@ namespace Sudoku
         public bool checkOneLine(int i)
         {
             var tab = new List<int>();
-            foreach(Case c in List_cases[i])
+            foreach(Case c in List_cases)
             {
                 tab.Add(c.Value);
             }            
@@ -51,12 +51,12 @@ namespace Sudoku
 
         public void setCase(int i, int j,int value)
         {
-            List_cases[i][j].Value = value;
+            List_cases[i,j].Value = value;
         }
 
         public int  getCase(int i,int j)
         {
-            return List_cases[i][j].Value;
+            return List_cases[i,j].Value;
         }
 
 

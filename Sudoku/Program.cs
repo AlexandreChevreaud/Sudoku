@@ -17,7 +17,7 @@ namespace Sudoku
             /*Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());*/
-            GenerateurGrille.generer(1);
+            GenerateurGrille.generer(8);
         }
     }
 }

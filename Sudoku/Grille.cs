@@ -32,14 +32,31 @@ namespace Sudoku
             var tab = new List<int>();
             foreach(Case c in List_cases[i])
             {
-                tab.Add(c.value);
+                tab.Add(c.Value);
             }            
             return tab.Intersect(list_nb).Count() == list_nb.Count();
         }
 
+        public bool checkAllLine()
+        {
+            for (int i=0; i<9;i++)
+            {               
+                if (!checkOneLine(i))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void setCase(int i, int j,int value)
         {
-            List_cases[i][j].value = value;
+            List_cases[i][j].Value = value;
+        }
+
+        public int  getCase(int i,int j)
+        {
+            return List_cases[i][j].Value;
         }
 
 

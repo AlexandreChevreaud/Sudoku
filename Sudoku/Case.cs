@@ -8,7 +8,9 @@ namespace Sudoku
 {
     public class Case
     {
-        public int value { get; set; }
+        private int value;
+        public int Value { get => value; set => this.value = value; }
+
         public Case(int n)
         {
             if (n>0 && n<=9)

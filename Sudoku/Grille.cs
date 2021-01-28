@@ -31,7 +31,7 @@ namespace Sudoku
         }
 
         /// <summary>
-        /// Méthode permettant de vérifier si une ligne est bonne ou nom
+        /// Méthode permettant de vérifier si une ligne est bonne ou non
         /// </summary>
         /// <param name="i">ligne à vérifier</param>
         /// <returns>booléan représentant si la ligne est correct</returns>
@@ -43,6 +43,28 @@ namespace Sudoku
                 tab.Add(c.Value);
             }            
             return tab.Intersect(list_nb).Count() == list_nb.Count();
+        }
+
+        /// <summary>
+        /// Méthode permettant de vérifier si une colonne est bonne ou non
+        /// </summary>
+        /// <param name="i">colonne à vérifier</param>
+        /// <returns>booléan représentant si la colonne est correct</returns>
+        public bool checkOneColumn(int i)
+        {
+            //TODO
+            return false;
+        }
+
+        /// <summary>
+        /// Méthode permettant de vérifier si une carré de 3*3 est bon ou non
+        /// </summary>
+        /// <param name="i">carré à vérifier</param>
+        /// <returns>booléan représentant si le carré est correct</returns>
+        public bool checkOneSquare(int i)
+        {
+            //TODO
+            return false;
         }
 
         /// <summary>
@@ -59,6 +81,37 @@ namespace Sudoku
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Méthode permettant de vérifier toutes les colonnes du code
+        /// </summary>
+        /// <returns>Boolean représentant si toutes les colonnes sont bonnes</returns>
+        public bool checkAllColumn()
+        {
+           //TODO
+            return true;
+        }
+
+        /// <summary>
+        /// Méthode permettant de vérifier tout les carrés du code
+        /// </summary>
+        /// <returns>Boolean représentant si toutes les carrés sont bons</returns>
+        public bool checkAllSquare()
+        {
+            //TODO
+            return true;
+        }
+
+        /// <summary>
+        /// Méthode qui permet de vérifier si le sudoku est valide ou non
+        /// </summary>
+        /// <returns></returns>
+        public bool checkSudoku()
+        {
+            //TODO
+            return false;
+
         }
 
         /// <summary>

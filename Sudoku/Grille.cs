@@ -29,17 +29,17 @@ namespace Sudoku
 
         public bool checkOneLine(int i)
         {
-            var containsAll = false;
             var tab = new List<int>();
             foreach(Case c in List_cases[i])
             {
                 tab.Add(c.value);
-            }
-            if (tab == list_nb)
-            {
-                containsAll = true;
-            }
-            return containsAll;
+            }            
+            return tab.Intersect(list_nb).Count() == list_nb.Count();
+        }
+
+        public void setCase(int i, int j,int value)
+        {
+            List_cases[i][j].value = value;
         }
 
 

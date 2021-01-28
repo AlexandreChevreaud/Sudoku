@@ -8,10 +8,18 @@ namespace Sudoku
 {
     public class Case
     {
-        private int value;
+        public int value { get; set; }
         public Case(int n)
         {
-            value = n;
+            if (n>0 && n<=9)
+            {
+                value = n;
+            }
+            else
+            {
+                value = 0;
+            }
+
         }
     }
     

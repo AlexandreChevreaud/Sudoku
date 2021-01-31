@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
+    //TODO : changer le graphisme
     public partial class Form1 : Form
     {
         private List<TextBox> tabTB;
@@ -23,19 +24,21 @@ namespace Sudoku
             }
             foreach (TextBox t in tabTB)
             {
-                t.LostFocus += new EventHandler(changement);
+                t.LostFocus += new EventHandler(Changement);
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+           //TODO : à supprimer
         }
-        public void changement(object sender, EventArgs e)
+        public void Changement(object sender, EventArgs e)
         {
-            if((Control)sender != this) { 
-                TableLayoutPanelCellPosition pos = this.Grid.GetCellPosition((TextBox)sender);
-                grille.setCaseValue(pos.Row, pos.Column, Int16.Parse(((TextBox)sender).Text));
+            if((Control)sender != this) {
+                TextBox tb = ((TextBox)sender);
+                TableLayoutPanelCellPosition pos = this.Grid.GetCellPosition(tb);
+                //TODO : gérer l'observabilité
+                grille.setCaseValue(pos.Row, pos.Column, Int16.Parse(tb.Text));
                 if(grille.checkSudoku())
                 {
                     string message = "Voulez-vous relancer une partie ?";
@@ -49,7 +52,10 @@ namespace Sudoku
                     }
                     else
                     {
-                        grille = GenerateurGrille.genererGrilleAvecTrou(10);
+                        //TODO : Ca marche pas 
+                        tb.LostFocus -= new EventHandler(Changement);
+                        grille = GenerateurGrille.genererGrilleAléatoire(10);
+                        tb.LostFocus += new EventHandler(Changement);
                     }
                 }
             }

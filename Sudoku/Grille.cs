@@ -175,11 +175,5 @@ namespace Sudoku
         {
             return List_cases[i, j].Value;
         }
-
-
-        public Case getCase(int i, int j)
-        {
-            return List_cases[i, j];
-        }
     }
 }

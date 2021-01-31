@@ -12,8 +12,9 @@ namespace Sudoku
         /// </summary>
         /// <param name="nbCases">Nombre de cases à afficher</param>
         /// <returns>Une grille avec des 0 sur les cases à deviner</returns>
-        public static Grille genererGrilleAvecTrou(int nbCases)
+        public static Grille genererGrilleAléatoire(int nbCases)
         {
+            //TODO : faire une méthode pour un aléatoire total
             Grille grille = GenerateurGrille.genererGrilleValide();
             for (int i = 1;i <= 81 - nbCases;i++)
             {
@@ -36,7 +37,7 @@ namespace Sudoku
         public static Grille genererGrilleValide()
         {
             Grille grille = new Grille();   
-                                                    //2
+                                                    
             int[] tab = { 1, 2, 3, 7, 5, 6, 4, 8, 9, 
                           7, 5, 6, 4, 8, 9, 1, 2, 3, 
                           9, 8, 4, 1, 2, 3, 7, 6, 5,

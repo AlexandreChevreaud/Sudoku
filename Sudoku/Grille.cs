@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,26 +9,25 @@ namespace Sudoku
 {
     public class Grille
     {
-        private Case[,] List_cases = new Case[9,9];
-        private List<int> list_nb = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        private Case[,] List_cases = new Case[9, 9];
 
         public Grille()
         {
             InitialiserGrille();
         }
-        
+
         /// <summary>
         /// Méthode permettant d'initialiser une grille vide
         /// </summary>
         private void InitialiserGrille()
         {
-           for (int i =0; i<9;i++)
-           {
-                for (int j=0; j<9;j++)
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
                 {
-                    List_cases[i,j] = new Case(0);
+                    List_cases[i, j] = new Case(0);
                 }
-           }
+            }
         }
 
         /// <summary>
@@ -38,11 +38,15 @@ namespace Sudoku
         public bool checkOneLine(int i)
         {
             var tab = new List<int>();
-            foreach(Case c in List_cases)
+            for (int j = 0; j < 9; j++)
             {
-                tab.Add(c.Value);
-            }            
-            return tab.Intersect(list_nb).Count() == list_nb.Count();
+                if (tab.Contains(List_cases[i, j].Value))
+                {
+                    return false;
+                }
+                tab.Add(List_cases[i, j].Value);
+            }
+            return true;
         }
 
         /// <summary>
@@ -50,21 +54,43 @@ namespace Sudoku
         /// </summary>
         /// <param name="i">colonne à vérifier</param>
         /// <returns>booléan représentant si la colonne est correct</returns>
-        public bool checkOneColumn(int i)
+        public bool checkOneColumn(int j)
         {
-            //TODO
-            return false;
+            var tab = new List<int>();
+            for (int i = 0; i < 9; i++)
+            {
+                if (tab.Contains(List_cases[i, j].Value))
+                {
+                    return false;
+                }
+                tab.Add(List_cases[i, j].Value);
+            }
+            return true;
         }
 
         /// <summary>
         /// Méthode permettant de vérifier si une carré de 3*3 est bon ou non
         /// </summary>
-        /// <param name="i">carré à vérifier</param>
+        /// <param name="nb">carré à vérifier</param>
         /// <returns>booléan représentant si le carré est correct</returns>
-        public bool checkOneSquare(int i)
+        public bool checkOneSquare(int nb)
         {
-            //TODO
-            return false;
+            int ligne = (nb / 3) * 3;
+            int colonne = (nb % 3) * 3;
+            var tab = new List<int>();
+            for (int i = ligne; i < ligne + 3; i++)
+            {
+                for (int j = colonne; j < colonne + 3; j++)
+                {
+                    if (tab.Contains(List_cases[i, j].Value) || List_cases[i, j].Value == 0)
+                    {
+                        return false;
+                    }
+                    tab.Add(List_cases[i, j].Value);
+
+                }
+            }
+            return true;
         }
 
         /// <summary>
@@ -73,8 +99,8 @@ namespace Sudoku
         /// <returns>Boolean représentant si toutes les lignes sont bonnes</returns>
         public bool checkAllLine()
         {
-            for (int i=0; i<9;i++)
-            {               
+            for (int i = 0; i < 9; i++)
+            {
                 if (!checkOneLine(i))
                 {
                     return false;
@@ -89,7 +115,13 @@ namespace Sudoku
         /// <returns>Boolean représentant si toutes les colonnes sont bonnes</returns>
         public bool checkAllColumn()
         {
-           //TODO
+            for (int j = 0; j < 9; j++)
+            {
+                if (!checkOneColumn(j))
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
@@ -99,7 +131,13 @@ namespace Sudoku
         /// <returns>Boolean représentant si toutes les carrés sont bons</returns>
         public bool checkAllSquare()
         {
-            //TODO
+            for (int j = 0; j < 9; j++)
+            {
+                if (!checkOneSquare(j))
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
@@ -109,9 +147,11 @@ namespace Sudoku
         /// <returns></returns>
         public bool checkSudoku()
         {
-            //TODO
+            if (checkAllSquare() && checkAllColumn() && checkAllLine())
+            {
+                return true;
+            }
             return false;
-
         }
 
         /// <summary>
@@ -120,9 +160,9 @@ namespace Sudoku
         /// <param name="i">ligne de la case</param>
         /// <param name="j">colonne de la case</param>
         /// <param name="value">Valeur à mettre dans la case</param>
-        public void setCaseValue(int i, int j,int value)
+        public void setCaseValue(int i, int j, int value)
         {
-            List_cases[i,j].Value = value;
+            List_cases[i, j].Value = value;
         }
 
         /// <summary>
@@ -131,11 +171,15 @@ namespace Sudoku
         /// <param name="i">ligne de la case</param>
         /// <param name="j">colonne de la case</param>
         /// <returns></returns>
-        public int getCaseValue(int i,int j)
+        public int getCaseValue(int i, int j)
         {
-            return List_cases[i,j].Value;
+            return List_cases[i, j].Value;
         }
 
 
+        public Case getCase(int i, int j)
+        {
+            return List_cases[i, j];
+        }
     }
 }

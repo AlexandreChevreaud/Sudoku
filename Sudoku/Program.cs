@@ -18,7 +18,7 @@ namespace Sudoku
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
             Grille g = GenerateurGrille.genererGrilleValide();
-            var v = g.checkAllLine();
+            Console.WriteLine(g.checkSudoku());
         }
     }
 }

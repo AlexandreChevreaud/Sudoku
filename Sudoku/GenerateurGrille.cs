@@ -8,7 +8,7 @@ namespace Sudoku
 {    public static class GenerateurGrille
     {
         /// <summary>
-        /// Permet de génerer une grille de sudoku aléatoire
+        /// Permet de générer la grille et de mettre des cases vides
         /// </summary>
         /// <param name="nbCases">Nombre de cases à afficher</param>
         /// <returns>Une grille avec des 0 sur les cases à deviner</returns>
@@ -29,12 +29,23 @@ namespace Sudoku
             }
             return grille;
         }
-
-        private static Grille genererGrilleValide()
+        /// <summary>
+        /// Permet de générer une grille de sudoku valide
+        /// </summary>
+        /// <returns>return une Grille valide</returns>
+        public static Grille genererGrilleValide()
         {
-            Grille grille = new Grille();
-
-            int[] tab = { 1, 2, 3, 7, 5, 6, 4, 8, 9, 7, 5, 6, 4, 8, 9, 1, 2, 3, 9, 8, 4, 1, 2, 3, 7, 6, 5, 4, 3, 5, 8, 6, 7, 2, 9, 1, 2, 6, 7, 5, 9, 1, 8, 3, 4, 8, 9, 1, 2, 3, 4, 6, 5, 7, 3, 4, 9, 6, 7, 8, 5, 1, 2, 5, 7, 8, 9, 1, 2, 3, 4, 6, 6, 1, 2, 3, 4, 5, 9, 7, 8 };
+            Grille grille = new Grille();   
+                                                    //2
+            int[] tab = { 1, 2, 3, 7, 5, 6, 4, 8, 9, 
+                          7, 5, 6, 4, 8, 9, 1, 2, 3, 
+                          9, 8, 4, 1, 2, 3, 7, 6, 5,
+                          4, 3, 5, 8, 6, 7, 2, 9, 1, 
+                          2, 6, 7, 5, 9, 1, 8, 3, 4, 
+                          8, 9, 1, 2, 3, 4, 6, 5, 7, 
+                          3, 4, 9, 6, 7, 8, 5, 1, 2, 
+                          5, 7, 8, 9, 1, 2, 3, 4, 6,
+                          6, 1, 2, 3, 4, 5, 9, 7, 8 };
 
             for (int i = 0; i <= 8; i++)
             {

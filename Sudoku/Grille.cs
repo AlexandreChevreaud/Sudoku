@@ -175,5 +175,42 @@ namespace Sudoku
         {
             return List_cases[i, j].Value;
         }
+        /// <summary>
+        /// To string
+        /// </summary>
+        /// <returns></returns>
+        public string ToString()
+        {
+            string s = "";
+            var count = 0;
+            foreach (var c in this.List_cases)
+            {
+                s += c.Value + " ";
+                count++;
+                if (count%9==0)
+                {
+                    s += "\n";
+                }
+            }
+            return s;
+        }
+        /// <summary>
+        /// get all value 
+        /// </summary>
+        /// <returns></returns>
+        public List<int> getAllValues()
+        {
+            List<int> l = new List<int>();
+            foreach (var c in this.List_cases)
+            {
+                l.Add(c.Value);
+            }
+            return l;
+        }
+
+        public Case getCase(int x, int y)
+        {
+            return this.List_cases[x,y];
+        }
     }
 }

@@ -27,6 +27,9 @@ namespace Sudoku
                     y = rnd.Next(9);
                 } while (grille.getCaseValue(x,y)==0);
                 grille.setCaseValue(x, y, 0);
+                grille.getCase(x, y).IsChecked = true;
+                
+
             }
             return grille;
         }
@@ -58,6 +61,8 @@ namespace Sudoku
 
             return grille;
         }
+
+
 
     }
 }

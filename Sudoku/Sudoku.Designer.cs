@@ -1,7 +1,7 @@
 ﻿
 namespace Sudoku
 {
-    partial class Form1
+    partial class Sudoku
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -19,9 +19,16 @@ namespace Sudoku
                 components.Dispose();
             }
             base.Dispose(disposing);
+            
         }
 
-        #region Code généré par le Concepteur Windows Form
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var mainmenu = new MainMenu();
+            mainmenu.Show();
+        }
+
+        #region Initialisation des textBox
 
         /// <summary>
         /// Méthode requise pour la prise en charge du concepteur - ne modifiez pas
@@ -30,6 +37,9 @@ namespace Sudoku
         private void InitializeComponent()
         {
             this.Grid = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tb1 = new System.Windows.Forms.TextBox();
+            this.Vérifier = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Grid
@@ -43,7 +53,7 @@ namespace Sudoku
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.Grid.Location = new System.Drawing.Point(12, 12);
             this.Grid.Name = "Grid";
             this.Grid.RowCount = 9;
@@ -59,22 +69,82 @@ namespace Sudoku
             this.Grid.Size = new System.Drawing.Size(739, 415);
             this.Grid.TabIndex = 0;
             // 
-            // Form1
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(195, 451);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.TabIndex = 1;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // tb1
+            // 
+            this.tb1.Location = new System.Drawing.Point(429, 450);
+            this.tb1.Name = "tb1";
+            this.tb1.Size = new System.Drawing.Size(100, 22);
+            this.tb1.TabIndex = 2;
+            // 
+            // Vérifier
+            // 
+            this.Vérifier.Location = new System.Drawing.Point(846, 56);
+            this.Vérifier.Name = "Vérifier";
+            this.Vérifier.Size = new System.Drawing.Size(75, 23);
+            this.Vérifier.TabIndex = 3;
+            this.Vérifier.Text = "Vérifier le sudoku";
+            this.Vérifier.UseVisualStyleBackColor = true;
+            this.Vérifier.Click += new System.EventHandler(this.Vérifier_Click);
+            // 
+            // Sudoku
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(953, 484);
+            this.Controls.Add(this.Vérifier);
+            this.Controls.Add(this.tb1);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Grid);
-            this.Name = "Form1";
+            this.Name = "Sudoku";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Closing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
+
+
+        /// <summary>
+        /// c'ets de la zeub, mais c'est pour 
+        /// </summary>
+        /// 
+        /*
+        public void check()
+        {
+            for (int i=0; i<9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    if (this.grille.getCase(i, j).IsChecked)
+                    {
+                        var tb = tabTB.
+                        tb1.ReadOnly = true;
+                        tb1.BorderStyle = BorderStyle.None;
+                        tb1.Enabled = false;
+                    }
+                }
+            }
+
+        }*/
 
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel Grid;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox tb1;
+        private System.Windows.Forms.Button Vérifier;
     }
 }
 

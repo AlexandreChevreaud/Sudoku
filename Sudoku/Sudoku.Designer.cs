@@ -53,8 +53,9 @@ namespace Sudoku
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.Grid.Location = new System.Drawing.Point(12, 12);
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.Grid.Location = new System.Drawing.Point(62, 9);
+            this.Grid.Margin = new System.Windows.Forms.Padding(0);
             this.Grid.Name = "Grid";
             this.Grid.RowCount = 9;
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -68,6 +69,7 @@ namespace Sudoku
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.Grid.Size = new System.Drawing.Size(739, 415);
             this.Grid.TabIndex = 0;
+            this.Grid.Paint += new System.Windows.Forms.PaintEventHandler(this.Grid_Paint);
             // 
             // checkBox1
             // 
@@ -109,17 +111,14 @@ namespace Sudoku
             this.Name = "Sudoku";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Closing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Sudoku_Paint);
+            //this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Sudoku_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
 
-        /// <summary>
-        /// c'ets de la zeub, mais c'est pour 
-        /// </summary>
-        /// 
         /*
         public void check()
         {

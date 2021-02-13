@@ -46,10 +46,12 @@ namespace Sudoku
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 75);
+            this.ClientSize = new System.Drawing.Size(428, 291);
             this.Controls.Add(this.label1);
             this.Name = "NumberSudoku";
             this.Text = "Entrez un chiffre";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NumberSudoku_FormClosing);
+            this.Load += new System.EventHandler(this.NumberSudoku_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumberSudoku_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();

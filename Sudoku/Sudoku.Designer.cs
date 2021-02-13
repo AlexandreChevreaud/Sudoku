@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Sudoku
 {
     partial class Sudoku
@@ -20,6 +22,33 @@ namespace Sudoku
             }
             base.Dispose(disposing);
             
+        }
+
+        private (int,int) getPositionOfLabel(Label l)
+        {
+            for (int i = 0; i<Grid.ColumnCount;i++)
+            {
+                for (int j=0; j<Grid.RowCount; j++)
+                {
+                    if (isLabelEquals(l,i,j))
+                    {
+                        return (i, j);
+                    }
+                }
+            }
+            //changer ca mais je sais pas comment (i lfaut retourner une erreur je pense)
+            //TODO
+            return (-1,-1);
+        }
+
+        private bool isLabelEquals(Label l, int i, int j)
+        {
+            var g = Grid.GetControlFromPosition(i, j);
+            if (g.Equals(l))
+            {
+                return true;
+            }
+            else return false;
         }
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)

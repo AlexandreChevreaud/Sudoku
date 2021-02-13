@@ -55,13 +55,36 @@ namespace Sudoku
                     break;
 
             }
-            label.BackColor = Color.Transparent;
             this.Close();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void affectValueToLabel(int i)
+        {
+            this.label.Text = i.ToString();
+        }
+
+
+
+        private void NumberSudoku_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            label.BackColor = Color.Transparent;
+
+        }
+
+        private void NumberSudoku_Load(object sender, EventArgs e)
+        {
+            this.Focus();
         }
     }
 }

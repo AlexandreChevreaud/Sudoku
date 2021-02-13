@@ -175,10 +175,17 @@ namespace Sudoku
             if (sender.GetType().ToString() == "System.Windows.Forms.Label")
             {
                 Label l = (Label)sender;
+                var position = this.getPositionOfLabel(l);
                 l.BackColor = Color.CadetBlue;
                 Console.WriteLine("Entrez un chiffre");
                 NumberSudoku ns = new NumberSudoku(l);
-                ns.Show();
+                ns.ShowDialog();
+
+                Console.WriteLine("le label à été changé");
+                grille.setCaseValue(position.Item1,position.Item2,Int32.Parse(l.Text));
+
+                //il faut changer la valeur dans le back
+                //TODO
 
 
                                

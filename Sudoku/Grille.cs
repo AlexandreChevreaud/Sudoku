@@ -194,6 +194,7 @@ namespace Sudoku
             }
             return s;
         }
+
         /// <summary>
         /// get all value 
         /// </summary>

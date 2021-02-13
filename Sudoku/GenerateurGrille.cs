@@ -15,7 +15,7 @@ namespace Sudoku
         public static Grille genererGrilleAléatoire(int nbCases)
         {
             //TODO : faire une méthode pour un aléatoire total
-            Grille grille = GenerateurGrille.genererGrilleValide();
+            Grille grille = GenerateurGrille.generationV2();
             for (int i = 1;i <= 81 - nbCases;i++)
             {
                 int x;
@@ -62,7 +62,7 @@ namespace Sudoku
             return grille;
         }
 
-        public static Grille generationV3()
+        public static Grille generationV2()
         {
             Grille grille = new Grille();
             GenerateurGrille.addMiddleAnd2CornerSquare(grille);

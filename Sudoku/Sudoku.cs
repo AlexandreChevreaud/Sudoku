@@ -182,7 +182,7 @@ namespace Sudoku
                 ns.ShowDialog();
 
                 Console.WriteLine("le label à été changé");
-                grille.setCaseValue(position.Item1,position.Item2,Int32.Parse(l.Text));
+                grille.setCaseValue(position.Item2,position.Item1,Int32.Parse(l.Text));
 
                 //il faut changer la valeur dans le back
                 //TODO

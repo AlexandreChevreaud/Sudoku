@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Case.cs" />
+    <Compile Include="NumberSudoku.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NumberSudoku.Designer.cs">
+      <DependentUpon>NumberSudoku.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sudoku.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,7 +61,6 @@
     </Compile>
     <Compile Include="GenerateurGrille.cs" />
     <Compile Include="Grille.cs" />
-    <Compile Include="list.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +69,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NumberSudoku.resx">
+      <DependentUpon>NumberSudoku.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sudoku.resx">
       <DependentUpon>Sudoku.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Sudoku
 {
     partial class Sudoku
@@ -20,6 +22,33 @@ namespace Sudoku
             }
             base.Dispose(disposing);
             
+        }
+
+        private (int,int) getPositionOfLabel(Label l)
+        {
+            for (int i = 0; i<Grid.ColumnCount;i++)
+            {
+                for (int j=0; j<Grid.RowCount; j++)
+                {
+                    if (isLabelEquals(l,i,j))
+                    {
+                        return (i, j);
+                    }
+                }
+            }
+            //changer ca mais je sais pas comment (i lfaut retourner une erreur je pense)
+            //TODO
+            return (-1,-1);
+        }
+
+        private bool isLabelEquals(Label l, int i, int j)
+        {
+            var g = Grid.GetControlFromPosition(i, j);
+            if (g.Equals(l))
+            {
+                return true;
+            }
+            else return false;
         }
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -53,8 +82,9 @@ namespace Sudoku
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.Grid.Location = new System.Drawing.Point(12, 12);
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.Grid.Location = new System.Drawing.Point(62, 9);
+            this.Grid.Margin = new System.Windows.Forms.Padding(0);
             this.Grid.Name = "Grid";
             this.Grid.RowCount = 9;
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -68,6 +98,7 @@ namespace Sudoku
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.Grid.Size = new System.Drawing.Size(739, 415);
             this.Grid.TabIndex = 0;
+            this.Grid.Paint += new System.Windows.Forms.PaintEventHandler(this.Grid_Paint);
             // 
             // checkBox1
             // 
@@ -109,17 +140,14 @@ namespace Sudoku
             this.Name = "Sudoku";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Closing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Sudoku_Paint);
+            //this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Sudoku_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
 
-        /// <summary>
-        /// c'ets de la zeub, mais c'est pour 
-        /// </summary>
-        /// 
         /*
         public void check()
         {

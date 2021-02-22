@@ -21,14 +21,18 @@ namespace Sudoku
             for (int i = 0; i < 81; i++)
             {
                 Rectangle r = new Rectangle();
-                Label t = new Label();
-               
-                t.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                t.Text = "" + grille.getCaseValue(i / 9, i % 9);               
-                t.Click += new EventHandler(changeValueLabel);
-                tabTB.Add(t);
+                Label l = new Label();
+                l.Height = 50;
+                l.Width = 100;
+                l.TextAlign = ContentAlignment.MiddleCenter;
+                l.Font = new Font("Arial", 20);
+
+                l.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                l.Text = "" + grille.getCaseValue(i / 9, i % 9);
+                l.Click += new EventHandler(changeValueLabel);
+                tabTB.Add(l);
                 //tabRect.Add(r);
-                this.Grid.Controls.Add(t, i % 9, i / 9);
+                this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);
             }
             this.Invalidate();
@@ -49,6 +53,7 @@ namespace Sudoku
                 if (tabTB[i].Text != "0")
                 {
                     tabTB[i].BackColor = Color.White;
+                    tabTB[i].Click -= new EventHandler(changeValueLabel);
                 }
                 else
                 {
@@ -152,17 +157,7 @@ namespace Sudoku
 
         private void Sudoku_Paint(object sender, PaintEventArgs e)
         {
-            //Console.Write("Paint");
-            //Graphics g = e.Graphics;
-
-            //for (int i = 0; i < 8; i++)
-            //{
-            //    for (int j = 0; j < 8; j++)
-            //    {
-
-            //        g.DrawRectangle(Pens.Black, new Rectangle(50 * i, 50 * j, 100, 100));
-            //    }
-            //}
+            
         }
 
         private void Grid_Paint(object sender, PaintEventArgs e)
@@ -174,6 +169,7 @@ namespace Sudoku
         {
             if (sender.GetType().ToString() == "System.Windows.Forms.Label")
             {
+                var tabValue = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 Label l = (Label)sender;
                 var position = this.getPositionOfLabel(l);
                 l.BackColor = Color.CadetBlue;
@@ -186,9 +182,27 @@ namespace Sudoku
 
                 //il faut changer la valeur dans le back
                 //TODO
+                try
+                {
+                    int number;
+                    bool success = Int32.TryParse(l.Text, out number);
+                    if (success)
+                    {
+                        var value = Int32.Parse(l.Text);
+
+                        if (tabValue.Contains(value))
+                        {
+                            grille.setCaseValue(position.Item2, position.Item1, value);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex.Message);
+                }
 
 
-                               
+
             }
 
         }

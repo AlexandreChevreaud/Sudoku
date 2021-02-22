@@ -59,14 +59,14 @@ namespace Sudoku
             // jouerAuSudokuToolStripMenuItem
             // 
             this.jouerAuSudokuToolStripMenuItem.Name = "jouerAuSudokuToolStripMenuItem";
-            this.jouerAuSudokuToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.jouerAuSudokuToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.jouerAuSudokuToolStripMenuItem.Text = "Jouer au Sudoku";
             this.jouerAuSudokuToolStripMenuItem.Click += new System.EventHandler(this.jouerAuSudokuToolStripMenuItem_Click);
             // 
             // jouerAuMemoryToolStripMenuItem
             // 
             this.jouerAuMemoryToolStripMenuItem.Name = "jouerAuMemoryToolStripMenuItem";
-            this.jouerAuMemoryToolStripMenuItem.Size = new System.Drawing.Size(206, 26);
+            this.jouerAuMemoryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.jouerAuMemoryToolStripMenuItem.Text = "Jouer au memory";
             // 
             // MainMenu

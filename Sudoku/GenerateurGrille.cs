@@ -41,7 +41,6 @@ namespace Sudoku
         public static Grille viderGrilleUnique(int nbCases)
         {
             Grille grille = GenerateurGrille.generationV2();
-            grille.setCaseValue(0,0, 0);
             for (int i = 1; i < nbCases; i++)
             {
                 Random rnd = new Random();

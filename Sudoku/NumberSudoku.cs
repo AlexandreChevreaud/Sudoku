@@ -48,7 +48,7 @@ namespace Sudoku
                     label.Text = "8";
                     break;
                 case '9':
-                    label.Text = "";
+                    label.Text = "9";
                     break;
                 default:
                     this.Close();

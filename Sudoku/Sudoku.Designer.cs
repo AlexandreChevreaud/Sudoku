@@ -74,6 +74,7 @@ namespace Sudoku
             // Grid
             // 
             this.Grid.ColumnCount = 9;
+           
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.45763F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.54237F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
@@ -85,6 +86,8 @@ namespace Sudoku
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.Grid.Location = new System.Drawing.Point(62, 9);
             this.Grid.Margin = new System.Windows.Forms.Padding(0);
+            this.Grid.Padding = new Padding(0);
+            
             this.Grid.Name = "Grid";
             this.Grid.RowCount = 9;
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -145,27 +148,7 @@ namespace Sudoku
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-
-        /*
-        public void check()
-        {
-            for (int i=0; i<9; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    if (this.grille.getCase(i, j).IsChecked)
-                    {
-                        var tb = tabTB.
-                        tb1.ReadOnly = true;
-                        tb1.BorderStyle = BorderStyle.None;
-                        tb1.Enabled = false;
-                    }
-                }
-            }
-
-        }*/
+        }    
 
         #endregion
 

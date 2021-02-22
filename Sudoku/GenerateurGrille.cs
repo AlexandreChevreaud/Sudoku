@@ -14,7 +14,6 @@ namespace Sudoku
         /// <returns>Une grille avec des 0 sur les cases à deviner</returns>
         public static Grille genererGrilleAléatoire(int nbCases)
         {
-            //TODO : faire une méthode pour un aléatoire total
             Grille grille = GenerateurGrille.generationV2();
             for (int i = 1;i <= 81 - nbCases;i++)
             {
@@ -33,6 +32,56 @@ namespace Sudoku
             }
             return grille;
         }
+
+        /// <summary>
+        /// Méthode permettant de vider la grille tout en respectant le principe d'unicité
+        /// </summary>
+        /// <returns>Une grille valide ayant une seule solution</returns>
+        public static Grille viderGrilleUnique()
+        {
+            Grille grille = GenerateurGrille.generationV2();
+            grille.setCaseValue(0,0, 0);
+            for (int i = 1; i < 81; i++)
+            {
+                testerCase(grille, i);
+            }
+            return grille;
+        }
+
+        /// <summary>
+        /// Méthode permettant de tester si une case d'une grille est nécessaire pour valider le principe d'unicité 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        private static bool testerCase(Grille g, int position)
+        {
+            int compteurReussite = 0;
+            int x = position / 9;
+            int y = position % 9;
+            for (int chiffre = 1; chiffre <= 9; chiffre++)
+            {
+                if (chiffre != g.getCaseValue(x, y))
+                {
+                    // Console.WriteLine(x + " " + y + " " + chiffre);
+                    Grille aTester = new Grille(g);
+                    aTester.setCaseValue(x, y, chiffre);
+                    if (caseValide(aTester, 0) && aTester.checkSudoku())
+                    {
+                        compteurReussite += 1;
+                        if (compteurReussite == 1)
+                            return false;
+                    }
+                }
+            }
+            if (compteurReussite == 0)
+            {
+                g.setCaseValue(x, y, 0);
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Permet de générer une grille de sudoku valide
         /// </summary>

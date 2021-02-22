@@ -16,6 +16,18 @@ namespace Sudoku
             InitialiserGrille();
         }
 
+        public Grille(Grille g)
+        {
+            InitialiserGrille();
+            for (int i = 0; i <= 8; i++)
+            {
+                for (int j = 0; j <= 8; j++)
+                {
+                    setCaseValue(i, j, g.getCaseValue(i,j));
+                }
+            }
+        }
+
         /// <summary>
         /// Méthode permettant d'initialiser une grille vide
         /// </summary>
@@ -82,7 +94,7 @@ namespace Sudoku
             {
                 for (int j = colonne; j < colonne + 3; j++)
                 {
-                    if (tab.Contains(List_cases[i, j].Value) || List_cases[i, j].Value == 0)
+                    if (tab.Contains(List_cases[i, j].Value)|| List_cases[i, j].Value == 0) 
                     {
                         return false;
                     }

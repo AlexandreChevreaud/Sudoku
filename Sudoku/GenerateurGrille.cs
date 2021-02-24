@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sudoku
@@ -37,13 +38,17 @@ namespace Sudoku
         /// Méthode permettant de vider la grille tout en respectant le principe d'unicité
         /// </summary>
         /// <returns>Une grille valide ayant une seule solution</returns>
-        public static Grille viderGrilleUnique()
+        public static Grille viderGrilleUnique(int nbCases)
         {
             Grille grille = GenerateurGrille.generationV2();
             grille.setCaseValue(0,0, 0);
-            for (int i = 1; i < 81; i++)
+            for (int i = 1; i < nbCases; i++)
             {
-                testerCase(grille, i);
+                Random rnd = new Random();
+                Thread.Sleep(10);
+                int nb = rnd.Next(1, 81);
+                Console.WriteLine(nb);
+                testerCase(grille, nb);
             }
             return grille;
         }
@@ -163,7 +168,7 @@ namespace Sudoku
 
         private static bool absentSurBloc(int chiffre, Grille g, int i, int j)
         {
-            int _i = i - (i % 3), _j = j - (j % 3);  // ou encore : _i = 3*(i/3), _j = 3*(j/3);
+            int _i = i - (i % 3), _j = j - (j % 3);  
             for (i = _i; i < _i + 3; i++)
                 for (j = _j; j < _j + 3; j++)
                     if (g.getCaseValue(i, j) == chiffre)

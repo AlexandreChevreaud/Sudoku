@@ -15,7 +15,7 @@ namespace Sudoku
         {
             InitializeComponent();
             Console.Write("Intialisation");
-            grille = GenerateurGrille.genererGrilleAléatoire(10);
+            grille = GenerateurGrille.viderGrilleUnique(50);
             tabTB = new List<Label>();
             
             //tabRect = new List<Rectangle>();

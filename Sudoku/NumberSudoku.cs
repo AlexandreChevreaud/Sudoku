@@ -13,10 +13,43 @@ namespace Sudoku
     public partial class NumberSudoku : Form
     {
         private Label label;
+        private List<Button> buttons = new List<Button>();
         public NumberSudoku(Label l)
         {
             InitializeComponent();
             label = l;
+            int[,] value = {
+                    {1, 2,3},
+                    { 4,5,6},
+                    {7,8,9}
+                };
+            for (int i=1;i<4;i++)
+            {
+                for (int j=1; j<4;j++)
+                {
+                    var b = new Button();
+                    var sum = j + i * (i - 1);
+                    b.Text = value[i - 1, j - 1].ToString();
+                    b.Height = 75;
+                    b.Width  = 75;
+                    this.buttons.Add(b);
+                    b.KeyPress += new KeyPressEventHandler(NumberSudoku_KeyPress);
+                    b.Click += new EventHandler(ButtonsClick);
+
+                    this.GridButtons.Controls.Add(b, j-1, i-1);
+                }
+                
+            }
+        }
+
+        private void ButtonsClick(object sender, EventArgs e)
+        {
+            if (sender.GetType().ToString() == "System.Windows.Forms.Button")
+            {
+                Button b = (Button)sender;
+                label.Text = b.Text;
+            }
+            this.Close();
         }
 
         private void NumberSudoku_KeyPress(object sender, KeyPressEventArgs e)
@@ -78,13 +111,23 @@ namespace Sudoku
 
         private void NumberSudoku_FormClosing(object sender, FormClosingEventArgs e)
         {
-            label.BackColor = Color.Transparent;
+            label.BackColor = Color.White;
 
         }
 
         private void NumberSudoku_Load(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void Grid_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -17,10 +17,10 @@ namespace Sudoku
             Console.Write("Intialisation");
             grille = GenerateurGrille.genererGrilleAléatoire(10);
             tabTB = new List<Label>();
+            
             //tabRect = new List<Rectangle>();
             for (int i = 0; i < 81; i++)
             {
-                Rectangle r = new Rectangle();
                 Label l = new Label();
                 l.Height = 50;
                 l.Width = 100;
@@ -28,13 +28,16 @@ namespace Sudoku
                 l.Font = new Font("Arial", 20);
 
                 l.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                l.Text = "" + grille.getCaseValue(i / 9, i % 9);
+                //l.Text = "" + grille.getCaseValue(i / 9, i % 9);
+                
                 l.Click += new EventHandler(changeValueLabel);
                 tabTB.Add(l);
                 //tabRect.Add(r);
                 this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);
             }
+            initialisationTextBox(grille);
+            
             this.Invalidate();
 
             
@@ -52,12 +55,14 @@ namespace Sudoku
                 tabTB[i].Text = liste[i].ToString();
                 if (tabTB[i].Text != "0")
                 {
-                    tabTB[i].BackColor = Color.White;
+                    tabTB[i].BackColor = Color.Transparent;
                     tabTB[i].Click -= new EventHandler(changeValueLabel);
                 }
                 else
                 {
                     tabTB[i].Text = "";
+                    tabTB[i].BackColor = Color.White;
+
                 }
             }
         }
@@ -67,6 +72,8 @@ namespace Sudoku
         {
 
         }
+
+        
 
         /// <summary>
         /// change un textbox en label (possibilité de faire marche arrière)
@@ -138,11 +145,8 @@ namespace Sudoku
                     }
                     else
                     {
-                        //TODO : Ca marche pas 
-                        //tb.LostFocus -= new EventHandler(Changement);
                         grille = GenerateurGrille.genererGrilleAléatoire(10);
                         this.initialisationTextBox(grille);
-                        //tb.LostFocus += new EventHandler(Changement);
                     }
                 }
                 else
@@ -160,10 +164,7 @@ namespace Sudoku
             
         }
 
-        private void Grid_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void changeValueLabel(object sender, EventArgs e)
         {
@@ -173,12 +174,17 @@ namespace Sudoku
                 Label l = (Label)sender;
                 var position = this.getPositionOfLabel(l);
                 l.BackColor = Color.CadetBlue;
+                var lastValueLabel = l.Text;
                 Console.WriteLine("Entrez un chiffre");
                 NumberSudoku ns = new NumberSudoku(l);
                 ns.ShowDialog();
 
                 Console.WriteLine("le label à été changé");
-                grille.setCaseValue(position.Item2,position.Item1,Int32.Parse(l.Text));
+                if (lastValueLabel != l.Text)
+                {
+                    grille.setCaseValue(position.Item2, position.Item1, Int32.Parse(l.Text));
+
+                }
 
                 //il faut changer la valeur dans le back
                 //TODO

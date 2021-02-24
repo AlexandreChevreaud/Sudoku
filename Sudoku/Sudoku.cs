@@ -9,14 +9,14 @@ namespace Sudoku
     public partial class Sudoku : Form
     {
         //private List>> tabRect;
-        private List<Label> tabTB;
+        private List<Label> tabLabel;
         Grille grille = new Grille();
         public Sudoku()
         {
             InitializeComponent();
             Console.Write("Intialisation");
             grille = GenerateurGrille.viderGrilleUnique(50);
-            tabTB = new List<Label>();
+            tabLabel = new List<Label>();
             
             //tabRect = new List<Rectangle>();
             for (int i = 0; i < 81; i++)
@@ -31,12 +31,12 @@ namespace Sudoku
                 //l.Text = "" + grille.getCaseValue(i / 9, i % 9);
                 
                 l.Click += new EventHandler(changeValueLabel);
-                tabTB.Add(l);
+                tabLabel.Add(l);
                 //tabRect.Add(r);
                 this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);
             }
-            initialisationTextBox(grille);
+            initialisationLabel(grille);
             
             this.Invalidate();
 
@@ -47,23 +47,51 @@ namespace Sudoku
         /// TODO : changer pour la longueur de la boucle 
         /// </summary>
         /// <param name="cases"></param>
-        private void initialisationTextBox(Grille g)
+        private void initialisationLabel(Grille g)
         {
             var liste = g.getAllValues();
             for (int i = 0; i < liste.Count; i++)
             {
-                tabTB[i].Text = liste[i].ToString();
-                if (tabTB[i].Text != "0")
+                tabLabel[i].Text = liste[i].ToString();
+                if (tabLabel[i].Text != "0")
                 {
-                    tabTB[i].BackColor = Color.Transparent;
-                    tabTB[i].Click -= new EventHandler(changeValueLabel);
+                    //tabLabel[i].BackColor = Color.Transparent;
+                    tabLabel[i].Click -= new EventHandler(changeValueLabel);
                 }
                 else
                 {
-                    tabTB[i].Text = "";
-                    tabTB[i].BackColor = Color.White;
-
+                    tabLabel[i].Text = "";
+                    //tabLabel[i].BackColor = Color.White;
                 }
+                GriserLabel(tabLabel[i], i / 9, i % 9);
+
+                
+            }
+        }
+
+        private void GriserLabel(Label l,int x,int y)
+        {
+            if (((x>=3)&& (x <= 5)) && (y >= 0) && (y <= 2))
+            {
+                l.BackColor = Color.White;
+            } else if (((x >= 3) && (x <= 5)) && (y >= 6) && (y <= 8))
+            {
+                l.BackColor = Color.White;
+
+            }
+            else if (((x >= 0) && (x <= 2)) && (y >= 3) && (y <= 5))
+            {
+                l.BackColor = Color.White;
+
+            }
+            else if (((x >= 6) && (x <= 8)) && (y >= 3) && (y <= 5))
+            {
+                l.BackColor = Color.White;
+
+            }
+            else
+            {
+                l.BackColor = Color.LightGray;
             }
         }
 
@@ -146,7 +174,7 @@ namespace Sudoku
                     else
                     {
                         grille = GenerateurGrille.genererGrilleAléatoire(10);
-                        this.initialisationTextBox(grille);
+                        this.initialisationLabel(grille);
                     }
                 }
                 else
@@ -174,6 +202,7 @@ namespace Sudoku
                 Label l = (Label)sender;
                 var position = this.getPositionOfLabel(l);
                 l.BackColor = Color.CadetBlue;
+                l.ForeColor = Color.Blue;
                 var lastValueLabel = l.Text;
                 Console.WriteLine("Entrez un chiffre");
                 NumberSudoku ns = new NumberSudoku(l);
@@ -252,7 +281,7 @@ namespace Sudoku
                         //TODO : Ca marche pas 
                         //tb.LostFocus -= new EventHandler(Changement);
                         grille = GenerateurGrille.genererGrilleAléatoire(10);
-                        this.initialisationTextBox(grille);
+                        this.initialisationLabel(grille);
                         //tb.LostFocus += new EventHandler(Changement);
                     }
                 }

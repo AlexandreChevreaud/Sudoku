@@ -44,7 +44,7 @@ namespace Sudoku
             
         }
         /// <summary>
-        /// TODO : changer pour la longueur de la boucle 
+        /// 
         /// </summary>
         /// <param name="cases"></param>
         private void initialisationLabel(Grille g)
@@ -63,9 +63,7 @@ namespace Sudoku
                     tabLabel[i].Text = "";
                     //tabLabel[i].BackColor = Color.White;
                 }
-                GriserLabel(tabLabel[i], i / 9, i % 9);
-
-                
+                GriserLabel(tabLabel[i], i / 9, i % 9);               
             }
         }
 
@@ -87,7 +85,6 @@ namespace Sudoku
             else if (((x >= 6) && (x <= 8)) && (y >= 3) && (y <= 5))
             {
                 l.BackColor = Color.White;
-
             }
             else
             {
@@ -285,6 +282,21 @@ namespace Sudoku
                         //tb.LostFocus += new EventHandler(Changement);
                     }
                 }
+            }
+        }
+
+        private void helpClick(object sender, EventArgs e)
+        {
+            var x = MessageBox.Show("Une case du sudoku va être rempli. Voulez-vous utilisez l'aide",
+                                    "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (x == DialogResult.No)
+            {
+
+            }
+            else
+            {
+                //remplir une case en vert aléatoirement
             }
         }
     }

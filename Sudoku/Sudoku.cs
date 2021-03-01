@@ -9,18 +9,23 @@ namespace Sudoku
     public partial class Sudoku : Form
     {
         //private List>> tabRect;
-        private List<Label> tabTB;
+        private List<Label> tabLabel;
         Grille grille = new Grille();
         public Sudoku()
         {
             InitializeComponent();
             Console.Write("Intialisation");
+            grille = GenerateurGrille.viderGrilleUnique(50);
+            tabLabel = new List<Label>();
+            
+            //tabRect = new List<Rectangle>();
+            for (int i = 0; i < 81; i++)
+            {
             grille = GenerateurGrille.viderGrilleUnique(20);
             tabTB = new List<Label>();
             //tabRect = new List<Rectangle>();
             for (int i = 0; i < 81; i++)
             {
-                Rectangle r = new Rectangle();
                 Label l = new Label();
                 l.Height = 50;
                 l.Width = 100;
@@ -28,37 +33,66 @@ namespace Sudoku
                 l.Font = new Font("Arial", 20);
 
                 l.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                l.Text = "" + grille.getCaseValue(i / 9, i % 9);
+                //l.Text = "" + grille.getCaseValue(i / 9, i % 9);
                 l.Click += new EventHandler(changeValueLabel);
                 tabTB.Add(l);
                 //tabRect.Add(r);
                 this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);
             }
+            initialisationLabel(grille);
+            
             this.Invalidate();
 
             
             
         }
         /// <summary>
-        /// TODO : changer pour la longueur de la boucle 
+        /// 
         /// </summary>
         /// <param name="cases"></param>
-        private void initialisationTextBox(Grille g)
+        private void initialisationLabel(Grille g)
         {
             var liste = g.getAllValues();
             for (int i = 0; i < liste.Count; i++)
             {
-                tabTB[i].Text = liste[i].ToString();
-                if (tabTB[i].Text != "0")
+                tabLabel[i].Text = liste[i].ToString();
+                if (tabLabel[i].Text != "0")
                 {
-                    tabTB[i].BackColor = Color.White;
-                    tabTB[i].Click -= new EventHandler(changeValueLabel);
+                    //tabLabel[i].BackColor = Color.Transparent;
+                    tabLabel[i].Click -= new EventHandler(changeValueLabel);
                 }
                 else
                 {
-                    tabTB[i].Text = "";
+                    tabLabel[i].Text = "";
+                    //tabLabel[i].BackColor = Color.White;
                 }
+                GriserLabel(tabLabel[i], i / 9, i % 9);               
+            }
+        }
+
+        private void GriserLabel(Label l,int x,int y)
+        {
+            if (((x>=3)&& (x <= 5)) && (y >= 0) && (y <= 2))
+            {
+                l.BackColor = Color.White;
+            } else if (((x >= 3) && (x <= 5)) && (y >= 6) && (y <= 8))
+            {
+                l.BackColor = Color.White;
+
+            }
+            else if (((x >= 0) && (x <= 2)) && (y >= 3) && (y <= 5))
+            {
+                l.BackColor = Color.White;
+
+            }
+            else if (((x >= 6) && (x <= 8)) && (y >= 3) && (y <= 5))
+            {
+                l.BackColor = Color.White;
+            }
+            else
+            {
+                l.BackColor = Color.LightGray;
             }
         }
 
@@ -67,6 +101,8 @@ namespace Sudoku
         {
 
         }
+
+        
 
         /// <summary>
         /// change un textbox en label (possibilité de faire marche arrière)
@@ -138,11 +174,8 @@ namespace Sudoku
                     }
                     else
                     {
-                        //TODO : Ca marche pas 
-                        //tb.LostFocus -= new EventHandler(Changement);
                         grille = GenerateurGrille.genererGrilleAléatoire(10);
-                        this.initialisationTextBox(grille);
-                        //tb.LostFocus += new EventHandler(Changement);
+                        this.initialisationLabel(grille);
                     }
                 }
                 else
@@ -160,10 +193,7 @@ namespace Sudoku
             
         }
 
-        private void Grid_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void changeValueLabel(object sender, EventArgs e)
         {
@@ -173,12 +203,18 @@ namespace Sudoku
                 Label l = (Label)sender;
                 var position = this.getPositionOfLabel(l);
                 l.BackColor = Color.CadetBlue;
+                l.ForeColor = Color.Blue;
+                var lastValueLabel = l.Text;
                 Console.WriteLine("Entrez un chiffre");
                 NumberSudoku ns = new NumberSudoku(l);
                 ns.ShowDialog();
 
                 Console.WriteLine("le label à été changé");
-                grille.setCaseValue(position.Item2,position.Item1,Int32.Parse(l.Text));
+                if (lastValueLabel != l.Text)
+                {
+                    grille.setCaseValue(position.Item2, position.Item1, Int32.Parse(l.Text));
+
+                }
 
                 //il faut changer la valeur dans le back
                 //TODO
@@ -246,10 +282,25 @@ namespace Sudoku
                         //TODO : Ca marche pas 
                         //tb.LostFocus -= new EventHandler(Changement);
                         grille = GenerateurGrille.genererGrilleAléatoire(10);
-                        this.initialisationTextBox(grille);
+                        this.initialisationLabel(grille);
                         //tb.LostFocus += new EventHandler(Changement);
                     }
                 }
+            }
+        }
+
+        private void helpClick(object sender, EventArgs e)
+        {
+            var x = MessageBox.Show("Une case du sudoku va être rempli. Voulez-vous utilisez l'aide",
+                                    "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (x == DialogResult.No)
+            {
+
+            }
+            else
+            {
+                //remplir une case en vert aléatoirement
             }
         }
     }

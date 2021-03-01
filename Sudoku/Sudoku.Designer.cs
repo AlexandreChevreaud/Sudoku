@@ -69,25 +69,23 @@ namespace Sudoku
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tb1 = new System.Windows.Forms.TextBox();
             this.Vérifier = new System.Windows.Forms.Button();
+            this.helpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Grid
             // 
             this.Grid.ColumnCount = 9;
-           
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.45763F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.54237F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 84F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.Grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
             this.Grid.Location = new System.Drawing.Point(62, 9);
             this.Grid.Margin = new System.Windows.Forms.Padding(0);
-            this.Grid.Padding = new Padding(0);
-            
             this.Grid.Name = "Grid";
             this.Grid.RowCount = 9;
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -101,7 +99,6 @@ namespace Sudoku
             this.Grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.Grid.Size = new System.Drawing.Size(739, 415);
             this.Grid.TabIndex = 0;
-            this.Grid.Paint += new System.Windows.Forms.PaintEventHandler(this.Grid_Paint);
             // 
             // checkBox1
             // 
@@ -131,11 +128,22 @@ namespace Sudoku
             this.Vérifier.UseVisualStyleBackColor = true;
             this.Vérifier.Click += new System.EventHandler(this.Vérifier_Click);
             // 
+            // helpButton
+            // 
+            this.helpButton.Location = new System.Drawing.Point(846, 122);
+            this.helpButton.Name = "helpButton";
+            this.helpButton.Size = new System.Drawing.Size(84, 51);
+            this.helpButton.TabIndex = 4;
+            this.helpButton.Text = "Un peu d\'aide ?";
+            this.helpButton.UseVisualStyleBackColor = true;
+            this.helpButton.Click += new System.EventHandler(this.helpClick);
+            // 
             // Sudoku
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 484);
+            this.Controls.Add(this.helpButton);
             this.Controls.Add(this.Vérifier);
             this.Controls.Add(this.tb1);
             this.Controls.Add(this.checkBox1);
@@ -144,7 +152,6 @@ namespace Sudoku
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Closing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Sudoku_Paint);
-            //this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Sudoku_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,6 +163,7 @@ namespace Sudoku
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TextBox tb1;
         private System.Windows.Forms.Button Vérifier;
+        private Button helpButton;
     }
 }
 

@@ -10,7 +10,7 @@ namespace Sudoku
     public class Grille
     {
         private Case[,] List_cases = new Case[9, 9];
-
+        public Grille Solution { get; set; }
         public Grille()
         {
             InitialiserGrille();

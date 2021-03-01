@@ -38,11 +38,11 @@ namespace Sudoku
         /// Méthode permettant de vider la grille tout en respectant le principe d'unicité
         /// </summary>
         /// <returns>Une grille valide ayant une seule solution</returns>
-        public static Grille viderGrilleUnique(int nbCases)
+        public static Grille viderGrilleUnique(int nbEssais)
         {
             Grille grille = GenerateurGrille.generationV2();
-            grille.setCaseValue(0,0, 0);
-            for (int i = 1; i < nbCases; i++)
+            grille.Solution = grille;
+            for (int i = 1; i < nbEssais; i++)
             {
                 Random rnd = new Random();
                 Thread.Sleep(10);

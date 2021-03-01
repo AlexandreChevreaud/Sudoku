@@ -21,6 +21,11 @@ namespace Sudoku
             //tabRect = new List<Rectangle>();
             for (int i = 0; i < 81; i++)
             {
+            grille = GenerateurGrille.viderGrilleUnique(20);
+            tabTB = new List<Label>();
+            //tabRect = new List<Rectangle>();
+            for (int i = 0; i < 81; i++)
+            {
                 Label l = new Label();
                 l.Height = 50;
                 l.Width = 100;
@@ -29,9 +34,8 @@ namespace Sudoku
 
                 l.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 //l.Text = "" + grille.getCaseValue(i / 9, i % 9);
-                
                 l.Click += new EventHandler(changeValueLabel);
-                tabLabel.Add(l);
+                tabTB.Add(l);
                 //tabRect.Add(r);
                 this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);

@@ -198,8 +198,7 @@ namespace Sudoku
             {
                 var tabValue = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 Label l = (Label)sender;
-                var position = this.getPositionOfLabel(l);
-                l.BackColor = Color.CadetBlue;
+                var position = this.getPositionOfLabel(l);                
                 l.ForeColor = Color.Blue;
                 var lastValueLabel = l.Text;
                 Console.WriteLine("Entrez un chiffre");
@@ -297,22 +296,41 @@ namespace Sudoku
             }
             else
             {
-                bool trouve = true;
-                do
+                if (isGrilleEgale(this.grille,this.grille.Solution))
                 {
-                    Random rnd = new Random();
-                    int pos = rnd.Next(1, 81);
-                    int value = grille.getCaseValue(pos / 9, pos % 9);
-                    if (value == 0)
+
+                }
+                else
+                {
+                    bool trouve = true;
+                    do
                     {
-                        Console.WriteLine(pos);
-                        grille.setCaseValue(pos / 9, pos % 9, grille.Solution.getCaseValue(pos / 9, pos % 9));
-                        trouve = false;
-                        Console.WriteLine(grille.Solution.ToString());
-                        this.tabLabel[pos].Text = grille.Solution.getCaseValue(pos / 9, pos % 9).ToString();
-                    }
-                } while (trouve);
+                        Random rnd = new Random();
+                        int pos = rnd.Next(1, 81);
+                        int value = grille.getCaseValue(pos / 9, pos % 9);
+                        if (value == 0)
+                        {
+                            Console.WriteLine(pos);
+                            grille.setCaseValue(pos / 9, pos % 9, grille.Solution.getCaseValue(pos / 9, pos % 9));
+                            trouve = false;
+                            Console.WriteLine(grille.Solution.ToString());
+                            this.tabLabel[pos].Text = grille.Solution.getCaseValue(pos / 9, pos % 9).ToString();
+                        }
+                    } while (trouve);
+                }
+               
             }
+        }
+        private bool isGrilleEgale(Grille g1, Grille g2)
+        {
+            for (var i=0;i<81;i++)
+            {
+                if (g1.getCase(i % 9, i / 9).Value != g2.getCase(i % 9, i / 9).Value)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

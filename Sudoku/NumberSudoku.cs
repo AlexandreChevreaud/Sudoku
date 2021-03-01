@@ -111,7 +111,7 @@ namespace Sudoku
 
         private void NumberSudoku_FormClosing(object sender, FormClosingEventArgs e)
         {
-            label.BackColor = Color.White;
+            //label.BackColor = Color.White;
 
         }
 

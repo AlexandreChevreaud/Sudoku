@@ -21,11 +21,7 @@ namespace Sudoku
             //tabRect = new List<Rectangle>();
             for (int i = 0; i < 81; i++)
             {
-            grille = GenerateurGrille.viderGrilleUnique(20);
-            tabTB = new List<Label>();
-            //tabRect = new List<Rectangle>();
-            for (int i = 0; i < 81; i++)
-            {
+                //tabRect = new List<Rectangle>();
                 Label l = new Label();
                 l.Height = 50;
                 l.Width = 100;
@@ -35,7 +31,7 @@ namespace Sudoku
                 l.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 //l.Text = "" + grille.getCaseValue(i / 9, i % 9);
                 l.Click += new EventHandler(changeValueLabel);
-                tabTB.Add(l);
+                tabLabel.Add(l);
                 //tabRect.Add(r);
                 this.Grid.Controls.Add(l, i % 9, i / 9);
                 //this.Grid.Controls.Add(r, i % 9, i / 9);
@@ -47,11 +43,12 @@ namespace Sudoku
             
             
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cases"></param>
-        private void initialisationLabel(Grille g)
+        void initialisationLabel(Grille g)
         {
             var liste = g.getAllValues();
             for (int i = 0; i < liste.Count; i++)
@@ -291,7 +288,7 @@ namespace Sudoku
 
         private void helpClick(object sender, EventArgs e)
         {
-            var x = MessageBox.Show("Une case du sudoku va être rempli. Voulez-vous utilisez l'aide",
+            var x = MessageBox.Show("Une case du sudoku va être rempli. Voulez-vous utilisez l'aide ?",
                                     "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (x == DialogResult.No)
@@ -300,7 +297,21 @@ namespace Sudoku
             }
             else
             {
-                //remplir une case en vert aléatoirement
+                bool trouve = true;
+                do
+                {
+                    Random rnd = new Random();
+                    int pos = rnd.Next(1, 81);
+                    int value = grille.getCaseValue(pos / 9, pos % 9);
+                    if (value == 0)
+                    {
+                        Console.WriteLine(pos);
+                        grille.setCaseValue(pos / 9, pos % 9, grille.Solution.getCaseValue(pos / 9, pos % 9));
+                        trouve = false;
+                        Console.WriteLine(grille.Solution.ToString());
+                        this.tabLabel[pos].Text = grille.Solution.getCaseValue(pos / 9, pos % 9).ToString();
+                    }
+                } while (trouve);
             }
         }
     }

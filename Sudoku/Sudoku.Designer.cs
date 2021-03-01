@@ -109,7 +109,6 @@ namespace Sudoku
             this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // tb1
             // 
@@ -130,9 +129,9 @@ namespace Sudoku
             // 
             // helpButton
             // 
-            this.helpButton.Location = new System.Drawing.Point(846, 122);
+            this.helpButton.Location = new System.Drawing.Point(846, 121);
             this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(84, 51);
+            this.helpButton.Size = new System.Drawing.Size(75, 51);
             this.helpButton.TabIndex = 4;
             this.helpButton.Text = "Un peu d\'aide ?";
             this.helpButton.UseVisualStyleBackColor = true;

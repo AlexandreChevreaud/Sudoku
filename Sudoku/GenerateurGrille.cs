@@ -41,7 +41,7 @@ namespace Sudoku
         public static Grille viderGrilleUnique(int nbEssais)
         {
             Grille grille = GenerateurGrille.generationV2();
-            grille.Solution = grille;
+            grille.Solution = new Grille(grille);
             for (int i = 1; i < nbEssais; i++)
             {
                 Random rnd = new Random();
@@ -149,7 +149,13 @@ namespace Sudoku
 
             return false;
         }
-
+        /// <summary>
+        /// Méthode permettant de savoir si un chiffre est présent sur la ligne d'une grile
+        /// </summary>
+        /// <param name="chiffre">Chiffre a vérifier</param>
+        /// <param name="g">Grille sur laquelle se trouve la ligne</param>
+        /// <param name="i">Ligne a vérifier</param>
+        /// <returns>True si absent, false sinon </returns>
         private static bool absentSurLigne(int chiffre, Grille g, int i)
         {
             for (int j = 0; j < 9; j++)
@@ -176,6 +182,10 @@ namespace Sudoku
             return true;
         }
 
+        /// <summary>
+        /// Permet d'ajouter 3 carré de 3 
+        /// </summary>
+        /// <param name="g"></param>
         private static void addMiddleAnd2CornerSquare(Grille g)
         {
             GenerateurGrille.addNormalSquarre(g,0);

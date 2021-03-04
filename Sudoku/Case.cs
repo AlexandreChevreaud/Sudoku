@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Sudoku
 {
-    public class Case : INotifyPropertyChanged
+    public class Case 
     {
         private int value;
         private bool isChecked = false;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsChecked { get => isChecked; set => this.isChecked = value; }
         public int Value { get => value; set => this.value = value; }

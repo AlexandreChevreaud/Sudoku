@@ -13,9 +13,9 @@ namespace Sudoku
         /// </summary>
         /// <param name="nbCases">Nombre de cases à afficher</param>
         /// <returns>Une grille avec des 0 sur les cases à deviner</returns>
-        public static Grille genererGrilleAléatoire(int nbCases)
+        public static Grille GenererGrilleAléatoire(int nbCases)
         {
-            Grille grille = GenerateurGrille.generationV2();
+            Grille grille = GenerateurGrille.Generation();
             for (int i = 1;i <= 81 - nbCases;i++)
             {
                 int x;
@@ -25,9 +25,9 @@ namespace Sudoku
                     Random rnd = new Random();
                     x = rnd.Next(9);
                     y = rnd.Next(9);
-                } while (grille.getCaseValue(x,y)==0);
-                grille.setCaseValue(x, y, 0);
-                grille.getCase(x, y).IsChecked = true;
+                } while (grille.GetCaseValue(x,y)==0);
+                grille.SetCaseValue(x, y, 0);
+                grille.GetCase(x, y).IsChecked = true;
                 
 
             }
@@ -38,9 +38,9 @@ namespace Sudoku
         /// Méthode permettant de vider la grille tout en respectant le principe d'unicité
         /// </summary>
         /// <returns>Une grille valide ayant une seule solution</returns>
-        public static Grille viderGrilleUnique(int nbEssais)
+        public static Grille ViderGrilleUnique(int nbEssais)
         {
-            Grille grille = GenerateurGrille.generationV2();
+            Grille grille = GenerateurGrille.Generation();
             grille.Solution = new Grille(grille);
             for (int i = 1; i < nbEssais; i++)
             {
@@ -48,7 +48,7 @@ namespace Sudoku
                 Thread.Sleep(10);
                 int nb = rnd.Next(1, 81);
                 Console.WriteLine(nb);
-                testerCase(grille, nb);
+                TesterCase(grille, nb);
             }
             return grille;
         }
@@ -59,19 +59,18 @@ namespace Sudoku
         /// <param name="g"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        private static bool testerCase(Grille g, int position)
+        private static bool TesterCase(Grille g, int position)
         {
             int compteurReussite = 0;
             int x = position / 9;
             int y = position % 9;
             for (int chiffre = 1; chiffre <= 9; chiffre++)
             {
-                if (chiffre != g.getCaseValue(x, y))
+                if (chiffre != g.GetCaseValue(x, y))
                 {
-                    // Console.WriteLine(x + " " + y + " " + chiffre);
                     Grille aTester = new Grille(g);
-                    aTester.setCaseValue(x, y, chiffre);
-                    if (caseValide(aTester, 0) && aTester.checkSudoku())
+                    aTester.SetCaseValue(x, y, chiffre);
+                    if (CaseValide(aTester, 0) && aTester.CheckSudoku())
                     {
                         compteurReussite += 1;
                         if (compteurReussite == 1)
@@ -81,50 +80,33 @@ namespace Sudoku
             }
             if (compteurReussite == 0)
             {
-                g.setCaseValue(x, y, 0);
+                g.SetCaseValue(x, y, 0);
             }
 
             return true;
         }
 
         /// <summary>
-        /// Permet de générer une grille de sudoku valide
+        /// Méthode permettant de générer une grille valide
+        /// On génère 3 carré aléatoire en diagonal.
+        /// On génère ensuite les autres grâce a un algorithme backward.
         /// </summary>
-        /// <returns>return une Grille valide</returns>
-        public static Grille genererGrilleValide()
-        {
-            Grille grille = new Grille();   
-                                                    
-            int[] tab = { 1, 2, 3, 7, 5, 6, 4, 8, 9, 
-                          7, 5, 6, 4, 8, 9, 1, 2, 3, 
-                          9, 8, 4, 1, 2, 3, 7, 6, 5,
-                          4, 3, 5, 8, 6, 7, 2, 9, 1, 
-                          2, 6, 7, 5, 9, 1, 8, 3, 4, 
-                          8, 9, 1, 2, 3, 4, 6, 5, 7, 
-                          3, 4, 9, 6, 7, 8, 5, 1, 2, 
-                          5, 7, 8, 9, 1, 2, 3, 4, 6,
-                          6, 1, 2, 3, 4, 5, 9, 7, 8 };
-
-            for (int i = 0; i <= 8; i++)
-            {
-                for (int j = 0; j <= 8; j++)
-                {
-                    grille.setCaseValue(i, j, tab[i * 9 + j]);
-                }
-            }
-
-            return grille;
-        }
-
-        public static Grille generationV2()
+        /// <returns> Retourne une grille valide</returns>
+        private static Grille Generation()
         {
             Grille grille = new Grille();
-            GenerateurGrille.addMiddleAnd2CornerSquare(grille);
-            caseValide(grille, 0);
+            GenerateurGrille.AddMiddleAnd2CornerSquare(grille);
+            CaseValide(grille, 0);
             return grille;
         }
 
-        private static bool caseValide(Grille grille, int coordonnee)
+        /// <summary>
+        /// Méthode permettant de remplir la grille de sudoku
+        /// </summary>
+        /// <param name="grille">Grille</param>
+        /// <param name="coordonnee">Coordonnée de la case</param>
+        /// <returns>Grille rempli</returns>
+        private static bool CaseValide(Grille grille, int coordonnee)
         {
             if (coordonnee == 9 * 9)
                 return true;
@@ -132,65 +114,80 @@ namespace Sudoku
             int i = coordonnee / 9;
             int j = coordonnee % 9;
 
-            if (grille.getCaseValue(i, j) != 0)
-                return caseValide(grille, coordonnee + 1);
+            if (grille.GetCaseValue(i, j) != 0)
+                return CaseValide(grille, coordonnee + 1);
 
             for (int chiffre = 1; chiffre <= 9; chiffre++)
             {
-                if (absentSurLigne(chiffre, grille, i) && absentSurColonne(chiffre, grille, j) && absentSurBloc(chiffre, grille, i, j))
+                if (AbsentSurLigne(chiffre, grille, i) && AbsentSurColonne(chiffre, grille, j) && AbsentSurBloc(chiffre, grille, i, j))
                 {
-                    grille.setCaseValue(i, j, chiffre);
+                    grille.SetCaseValue(i, j, chiffre);
 
-                    if (caseValide(grille, coordonnee + 1))
+                    if (CaseValide(grille, coordonnee + 1))
                         return true;
                 }
             }
-            grille.setCaseValue(i, j, 0);
+            grille.SetCaseValue(i, j, 0);
 
             return false;
         }
         /// <summary>
-        /// Méthode permettant de savoir si un chiffre est présent sur la ligne d'une grile
+        /// Méthode permettant de savoir si un chiffre est présent sur la ligne donnée
         /// </summary>
         /// <param name="chiffre">Chiffre a vérifier</param>
         /// <param name="g">Grille sur laquelle se trouve la ligne</param>
         /// <param name="i">Ligne a vérifier</param>
         /// <returns>True si absent, false sinon </returns>
-        private static bool absentSurLigne(int chiffre, Grille g, int i)
+        private static bool AbsentSurLigne(int chiffre, Grille g, int i)
         {
             for (int j = 0; j < 9; j++)
-                if (g.getCaseValue(i, j) == chiffre)
+                if (g.GetCaseValue(i, j) == chiffre)
                     return false;
             return true;
         }
 
-        private static bool absentSurColonne(int chiffre, Grille g, int j)
+        /// <summary>
+        /// Méthode permettant de savoir si un chiffre un déjà présent sur une colonne donnée
+        /// </summary>
+        /// <param name="chiffre">Chiffre a vérifier</param>
+        /// <param name="g">Grille sur laquelle se trouve la colonne</param>
+        /// <param name="j">Colonne a vérifier</param>
+        /// <returns></returns>
+        private static bool AbsentSurColonne(int chiffre, Grille g, int j)
         {
             for (int i = 0; i < 9; i++)
-                if (g.getCaseValue(i, j) == chiffre)
+                if (g.GetCaseValue(i, j) == chiffre)
                     return false;
             return true;
         }
 
-        private static bool absentSurBloc(int chiffre, Grille g, int i, int j)
+        /// <summary>
+        /// Méthode permettant de check si un chiffre est présent dans un carré
+        /// </summary>
+        /// <param name="chiffre">Chiffre a vérifier</param>
+        /// <param name="g">Grille sur laquelle se trouve le carré</param>
+        /// <param name="i">position en x</param>
+        /// <param name="j">position en y</param>
+        /// <returns></returns>
+        private static bool AbsentSurBloc(int chiffre, Grille g, int i, int j)
         {
             int _i = i - (i % 3), _j = j - (j % 3);  
             for (i = _i; i < _i + 3; i++)
                 for (j = _j; j < _j + 3; j++)
-                    if (g.getCaseValue(i, j) == chiffre)
+                    if (g.GetCaseValue(i, j) == chiffre)
                         return false;
             return true;
         }
 
         /// <summary>
-        /// Permet d'ajouter 3 carré de 3 
+        /// Permet d'ajouter 3 carré de 3*3 aléatoires 
         /// </summary>
-        /// <param name="g"></param>
-        private static void addMiddleAnd2CornerSquare(Grille g)
+        /// <param name="g">Grille</param>
+        private static void AddMiddleAnd2CornerSquare(Grille g)
         {
-            GenerateurGrille.addNormalSquarre(g,0);
-            GenerateurGrille.addNormalSquarre(g,4);
-            GenerateurGrille.addNormalSquarre(g,8);
+            GenerateurGrille.AddNormalSquarre(g,0);
+            GenerateurGrille.AddNormalSquarre(g,4);
+            GenerateurGrille.AddNormalSquarre(g,8);
         }
   
 
@@ -198,17 +195,17 @@ namespace Sudoku
         /// Permet l'ajout d'un carré aléatoire
         /// <param name="g">Grille g sur laquelle on ajoute le carré</param>
         /// <param name="pos">position du carré</param>
-        private static void addNormalSquarre(Grille g,int pos)
+        private static void AddNormalSquarre(Grille g,int pos)
         {
             int ligne = (pos / 3) * 3;
             int colonne = (pos % 3) * 3;
             List<int> l = new List<int>();
-            l = GenerateurGrille.générerLigneValide();
+            l = GenerateurGrille.GénérerLigneValide();
             for (int i = ligne; i < ligne +3; i++)
             {
                 for (int j = colonne; j < colonne +3; j++)
                 {
-                    g.setCaseValue(i, j, l.First());
+                    g.SetCaseValue(i, j, l.First());
                     l.Remove(l.First());
                 }
             }
@@ -218,7 +215,7 @@ namespace Sudoku
         /// Méthode permettant de génerer une ligne valide de sudoku
         /// </summary>
         /// <returns>Une liste de valeur valide pour une grille de sudoku List<int> taille 9</returns>
-        private static List<int> générerLigneValide()
+        private static List<int> GénérerLigneValide()
         {
             Random rnd = new Random();
             List<int> ligne = new List<int>();

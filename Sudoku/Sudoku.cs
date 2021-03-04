@@ -15,7 +15,7 @@ namespace Sudoku
         {
             InitializeComponent();
             Console.Write("Intialisation");
-            grille = GenerateurGrille.viderGrilleUnique(50);
+            grille = GenerateurGrille.ViderGrilleUnique(50);
             tabLabel = new List<Label>();
             
             //tabRect = new List<Rectangle>();
@@ -50,7 +50,7 @@ namespace Sudoku
         /// <param name="cases"></param>
         void initialisationLabel(Grille g)
         {
-            var liste = g.getAllValues();
+            var liste = g.GetAllValues();
             for (int i = 0; i < liste.Count; i++)
             {
                 tabLabel[i].Text = liste[i].ToString();
@@ -158,7 +158,7 @@ namespace Sudoku
                 //TableLayoutPanelCellPosition pos = this.Grid.GetCellPosition(tb);
                 //TODO : gérer l'observabilité
                 //tony parker grille.setCaseValue(pos.Row, pos.Column, Int16.Parse(tb.Text));
-                if (grille.checkSudoku())
+                if (grille.CheckSudoku())
                 {
                     string message = "Voulez-vous relancer une partie ?";
                     string caption = "Vous avez terminé !";
@@ -171,7 +171,7 @@ namespace Sudoku
                     }
                     else
                     {
-                        grille = GenerateurGrille.genererGrilleAléatoire(10);
+                        grille = GenerateurGrille.GenererGrilleAléatoire(10);
                         this.initialisationLabel(grille);
                     }
                 }
@@ -208,7 +208,7 @@ namespace Sudoku
                 Console.WriteLine("le label à été changé");
                 if (lastValueLabel != l.Text)
                 {
-                    grille.setCaseValue(position.Item2, position.Item1, Int32.Parse(l.Text));
+                    grille.SetCaseValue(position.Item2, position.Item1, Int32.Parse(l.Text));
 
                 }
 
@@ -224,7 +224,7 @@ namespace Sudoku
 
                         if (tabValue.Contains(value))
                         {
-                            grille.setCaseValue(position.Item2, position.Item1, value);
+                            grille.SetCaseValue(position.Item2, position.Item1, value);
                         }
                     }
                 }
@@ -261,8 +261,8 @@ namespace Sudoku
                 tb.LostFocus -= new EventHandler(Changement);
                 TableLayoutPanelCellPosition pos = this.Grid.GetCellPosition(tb);
                 //TODO : gérer l'observabilité
-                grille.setCaseValue(pos.Row, pos.Column, Int16.Parse(tb.Text));
-                if (grille.checkSudoku())
+                grille.SetCaseValue(pos.Row, pos.Column, Int16.Parse(tb.Text));
+                if (grille.CheckSudoku())
                 {
                     string message = "Voulez-vous relancer une partie ?";
                     string caption = "Vous avez terminé !";
@@ -277,7 +277,7 @@ namespace Sudoku
                     {
                         //TODO : Ca marche pas 
                         //tb.LostFocus -= new EventHandler(Changement);
-                        grille = GenerateurGrille.genererGrilleAléatoire(10);
+                        grille = GenerateurGrille.GenererGrilleAléatoire(10);
                         this.initialisationLabel(grille);
                         //tb.LostFocus += new EventHandler(Changement);
                     }
@@ -307,14 +307,14 @@ namespace Sudoku
                     {
                         Random rnd = new Random();
                         int pos = rnd.Next(1, 81);
-                        int value = grille.getCaseValue(pos / 9, pos % 9);
+                        int value = grille.GetCaseValue(pos / 9, pos % 9);
                         if (value == 0)
                         {
                             Console.WriteLine(pos);
-                            grille.setCaseValue(pos / 9, pos % 9, grille.Solution.getCaseValue(pos / 9, pos % 9));
+                            grille.SetCaseValue(pos / 9, pos % 9, grille.Solution.GetCaseValue(pos / 9, pos % 9));
                             trouve = false;
                             Console.WriteLine(grille.Solution.ToString());
-                            this.tabLabel[pos].Text = grille.Solution.getCaseValue(pos / 9, pos % 9).ToString();
+                            this.tabLabel[pos].Text = grille.Solution.GetCaseValue(pos / 9, pos % 9).ToString();
                         }
                     } while (trouve);
                 }
@@ -325,7 +325,7 @@ namespace Sudoku
         {
             for (var i=0;i<81;i++)
             {
-                if (g1.getCase(i % 9, i / 9).Value != g2.getCase(i % 9, i / 9).Value)
+                if (g1.GetCase(i % 9, i / 9).Value != g2.GetCase(i % 9, i / 9).Value)
                 {
                     return false;
                 }

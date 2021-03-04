@@ -47,7 +47,6 @@ namespace Sudoku
                 Random rnd = new Random();
                 Thread.Sleep(10);
                 int nb = rnd.Next(1, 81);
-                Console.WriteLine(nb);
                 TesterCase(grille, nb);
             }
             return grille;

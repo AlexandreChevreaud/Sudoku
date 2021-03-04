@@ -310,10 +310,8 @@ namespace Sudoku
                         int value = grille.GetCaseValue(pos / 9, pos % 9);
                         if (value == 0)
                         {
-                            Console.WriteLine(pos);
                             grille.SetCaseValue(pos / 9, pos % 9, grille.Solution.GetCaseValue(pos / 9, pos % 9));
                             trouve = false;
-                            Console.WriteLine(grille.Solution.ToString());
                             this.tabLabel[pos].Text = grille.Solution.GetCaseValue(pos / 9, pos % 9).ToString();
                         }
                     } while (trouve);

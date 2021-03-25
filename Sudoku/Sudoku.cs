@@ -122,7 +122,7 @@ namespace Sudoku
                     }
                     else
                     {
-                        grille = GenerateurGrille.GenererGrilleAléatoire(10);
+                        grille = GenerateurGrille.ViderGrilleUnique(50);
                         this.initialisationLabel(grille);
                     }
                 }
